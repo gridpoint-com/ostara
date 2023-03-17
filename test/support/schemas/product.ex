@@ -1,5 +1,7 @@
 defmodule Ostara.Schemas.Product do
-  @moduledoc "A product from Acme's catalog"
+  @moduledoc """
+  A product from Acme's catalog
+  """
   use Ecto.Schema
 
   import Ecto.Changeset

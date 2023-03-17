@@ -38,7 +38,8 @@ defmodule Ostara.JSONSchema do
   defp put_description(map, module) do
     case Code.fetch_docs(module) do
       {:docs_v1, _, :elixir, _, %{"en" => module_doc}, _, _} ->
-        Map.put(map, "description", module_doc)
+        description = String.trim(module_doc)
+        Map.put(map, "description", description)
 
       _ ->
         map

@@ -2,8 +2,7 @@ defmodule OstaraTest do
   use ExUnit.Case
   alias Ostara.Schemas.Product
 
-  # Reference schema sourced from
-  # https://json-schema.org/learn/getting-started-step-by-step.html
+  # Test schema based on https://json-schema.org/learn/getting-started-step-by-step.html
   describe "transmute/1" do
     test "produces the correct schema" do
       assert Ostara.transmute(Product) == %{
@@ -46,7 +45,7 @@ defmodule OstaraTest do
                    "required" => ["length", "width", "height"]
                  }
                },
-               "required" => ["productId", "productName", "price"]
+               "required" => ["dimensions", "productId", "productName", "price"]
              }
     end
 

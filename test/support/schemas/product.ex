@@ -18,6 +18,7 @@ defmodule Ostara.Schemas.Product do
   def changeset(data, params) do
     data
     |> cast(params, [:product_id, :product_name, :price, :tags])
+    |> cast_embed(:dimensions, required: true)
     |> validate_required([:product_id, :product_name, :price])
     |> validate_number(:price, greater_than: 0)
     |> validate_length(:tags, min: 1)

@@ -31,14 +31,18 @@ defmodule Ostara.Validation do
 
   @spec apply_validation(ast(), map()) :: map()
   defp apply_validation({:validate_required, _, [list]}, map) do
-    list = Enum.map(list, &JSONSchema.field_name/1)
+    required = Enum.map(list, &JSONSchema.field_name/1)
+    update_required(map, required)
+  end
 
-    required =
-      map
-      |> Map.get("required", [])
-      |> Kernel.++(list)
+  defp apply_validation({:cast_embed, _, [field, list]}, map) do
+    case Keyword.get(list, :required) do
+      true ->
+        update_required(map, [JSONSchema.field_name(field)])
 
-    Map.put(map, "required", required)
+      _ ->
+        map
+    end
   end
 
   defp apply_validation({:validate_number, _, [field, list]}, map) do
@@ -80,6 +84,16 @@ defmodule Ostara.Validation do
   defp apply_validation(validation, map) do
     Logger.warn("No validation: " <> inspect(validation))
     map
+  end
+
+  @spec update_required(map(), [String.t()]) :: map()
+  defp update_required(map, list) do
+    required =
+      map
+      |> Map.get("required", [])
+      |> Kernel.++(list)
+
+    Map.put(map, "required", required)
   end
 
   @spec update_property(map(), String.t(), term()) :: map()

@@ -1,12 +1,14 @@
 defmodule Ostara do
   @moduledoc """
-  Provides the primary public interface.
+  `Ostara` transforms [Ecto](https://hexdocs.pm/ecto/Ecto.html) schema
+  modules into [JSON Schema](https://json-schema.org/) structures.
 
   ## Example
 
   Given the following schema module:
 
       defmodule Product do
+        @moduledoc "A product from Acme's catalog",
         use Ecto.Schema
 
         @primary_key false
@@ -24,21 +26,20 @@ defmodule Ostara do
         end
       end
 
-  `generate/`1` will produce the following map:
+  `transmute/1` will produce the following map:
 
       %{
         "$schema" => "https://json-schema.org/draft/2020-12/schema",
-        "$id" => "https://example.com/product.schema.json",
         "title" => "Product",
         "type" => "object",
         "description" => "A product from Acme's catalog",
         "properties" => %{
           "productName" => %{
-      	    "type" => "string"
+            "type" => "string"
           },
           "price" => %{
-      	    "type" => "number",
-      	    "exclusiveMinimum" => 0
+            "type" => "number",
+            "exclusiveMinimum" => 0
           }
         },
         "required" => ["productName"]
@@ -49,6 +50,11 @@ defmodule Ostara do
 
   @doc """
   Produces a JSON Schema based on the given `source` module.
+
+  ## Options
+
+    * `:format` - If `:json`, returns the data as pretty-printed JSON
+
   """
   @spec transmute(atom(), [{:format, atom()}]) :: map()
   def transmute(source, opts \\ []) when is_atom(source) do

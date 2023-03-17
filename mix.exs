@@ -14,6 +14,7 @@ defmodule Ostara.MixProject do
       description: " Converts Ecto schemas into JSON Schemas.",
       package: package(),
       deps: deps(),
+      docs: docs(),
       name: "Ostara",
       source_url: @source_url
     ]
@@ -36,6 +37,13 @@ defmodule Ostara.MixProject do
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:ecto, "~> 3.8"},
       {:jason, "~> 1.4"}
+    ]
+  end
+
+  defp docs do
+    [
+      extras: ["README.md"],
+      main: "readme"
     ]
   end
 

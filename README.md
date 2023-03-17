@@ -1,6 +1,6 @@
 # Ostara
 
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](CODE_OF_CONDUCT.md)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)][Contributor Covenant]
 
 Transforms [Ecto] schema modules into [JSON Schema] structures.
 
@@ -9,6 +9,52 @@ Transforms [Ecto] schema modules into [JSON Schema] structures.
 [Ostara _(1901) by Johannes Gehrts_][art]
 
 **Note:** Ostara is under active development and does not yet support all features of Ecto or the full JSON Schema specification. Contributions are welcome!
+
+## Example
+
+Given the following schema module:
+
+```elixir
+defmodule Product do
+  @moduledoc "A product from Acme's catalog",
+  use Ecto.Schema
+
+  @primary_key false
+
+  embedded_schema do
+  	field :product_name, :string
+  	field :price, :float
+  end
+
+  def changeset(data, params) do
+  	data
+  	|> cast(params, [:product_name, :price])
+  	|> validate_required([:product_name])
+  	|> validate_number(:price, greater_than: 0)
+  end
+end
+```
+
+Ostara will produce the following data:
+
+```elixir
+%{
+  "$schema" => "https://json-schema.org/draft/2020-12/schema",
+  "title" => "Product",
+  "type" => "object",
+  "description" => "A product from Acme's catalog",
+  "properties" => %{
+	"productName" => %{
+	  "type" => "string"
+	},
+	"price" => %{
+	  "type" => "number",
+	  "exclusiveMinimum" => 0
+	}
+  },
+  "required" => ["productName"]
+}
+```
 
 ## Installation
 
@@ -25,9 +71,11 @@ end
 ## License
 
 Ostara source code is released under Apache License 2.0. See
-[LICENSE](LICENSE) for more information.
+[LICENSE][LICENSE] for more information.
 
+[Contributor Covenant]: https://github.com/gridpoint-com/ostara/blob/main/CODE_OF_CONDUCT.md
 [Ecto]: https://hexdocs.pm/ecto/Ecto.html
 [JSON Schema]: https://json-schema.org/
+[LICENSE]: https://github.com/gridpoint-com/ostara/blob/main/LICENSE
 [art]: https://commons.wikimedia.org/wiki/File:Ostara_by_Johannes_Gehrts.jpg
 [available in Hex]: https://hex.pm/ostara

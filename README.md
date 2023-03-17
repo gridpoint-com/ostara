@@ -63,7 +63,7 @@ Ostara is [available in Hex] and can beinstalled by adding `ostara` to your list
 ```elixir
 def deps do
   [
-    {:ostara, "~> 0.1.0"}
+    {:ostara, "~> 0.2.0"}
   ]
 end
 ```

@@ -22,15 +22,15 @@ defmodule Product do
   @primary_key false
 
   embedded_schema do
-  	field :product_name, :string
-  	field :price, :float
+    field :product_name, :string
+    field :price, :float
   end
 
   def changeset(data, params) do
-  	data
-  	|> cast(params, [:product_name, :price])
-  	|> validate_required([:product_name])
-  	|> validate_number(:price, greater_than: 0)
+    data
+    |> cast(params, [:product_name, :price])
+    |> validate_required([:product_name])
+    |> validate_number(:price, greater_than: 0)
   end
 end
 ```
@@ -44,13 +44,13 @@ Ostara will produce the following data:
   "type" => "object",
   "description" => "A product from Acme's catalog",
   "properties" => %{
-	"productName" => %{
-	  "type" => "string"
-	},
-	"price" => %{
-	  "type" => "number",
-	  "exclusiveMinimum" => 0
-	}
+    "productName" => %{
+      "type" => "string"
+    },
+    "price" => %{
+      "type" => "number",
+      "exclusiveMinimum" => 0
+    }
   },
   "required" => ["productName"]
 }

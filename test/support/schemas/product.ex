@@ -3,7 +3,6 @@ defmodule Ostara.Schemas.Product do
   A product from Acme's catalog
   """
   use Ecto.Schema
-
   import Ecto.Changeset
 
   @primary_key false
@@ -14,13 +13,15 @@ defmodule Ostara.Schemas.Product do
     field :price, :float
     field :tags, {:array, :string}
 
-    embeds_many :dimensions, Ostara.Schemas.Dimensions
+    embeds_one :dimensions, Ostara.Schemas.Dimensions
+    embeds_many :reviews, __MODULE__.Review
   end
 
   def changeset(data, params) do
     data
     |> cast(params, [:product_id, :product_name, :price, :tags])
     |> cast_embed(:dimensions, required: true)
+    |> cast_embed(:reviews)
     |> validate_required([:product_id, :product_name, :price])
     |> validate_number(:price, greater_than: 0)
     |> validate_length(:tags, min: 1)

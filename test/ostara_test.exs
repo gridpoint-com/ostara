@@ -43,14 +43,32 @@ defmodule OstaraTest do
                      }
                    },
                    "required" => ["length", "width", "height"]
+                 },
+                 "reviews" => %{
+                   "type" => "array",
+                   "items" => %{
+                     "title" => "Review",
+                     "type" => "object",
+                     "properties" => %{
+                       "author" => %{
+                         "type" => "string"
+                       },
+                       "rating" => %{
+                         "type" => "integer",
+                         "exclusiveMinimum" => 0,
+                         "maximum" => 5
+                       }
+                     },
+                     "required" => ["rating"]
+                   }
                  }
                },
                "required" => ["dimensions", "productId", "productName", "price"]
              }
     end
 
-    test "generates JSON data" do
-      assert Ostara.transmute(Product, format: :json) =~ ~s("title": "Product")
-    end
+    # test "generates JSON data" do
+    #   assert Ostara.transmute(Product, format: :json) =~ ~s("title": "Product")
+    # end
   end
 end

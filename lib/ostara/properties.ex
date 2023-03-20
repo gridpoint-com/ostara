@@ -57,8 +57,15 @@ defmodule Ostara.Properties do
     }
   end
 
-  defp propertize_type({:parameterized, Ecto.Embedded, %{related: source}}) do
-    Ostara.JSONSchema.generate(source)
+  defp propertize_type({:parameterized, Ecto.Embedded, %{related: source, cardinality: :one}}) do
+    JSONSchema.generate(source)
+  end
+
+  defp propertize_type({:parameterized, Ecto.Embedded, %{related: source, cardinality: :many}}) do
+    %{
+      "type" => "array",
+      "items" => JSONSchema.generate(source)
+    }
   end
 
   defp propertize_type(type) do

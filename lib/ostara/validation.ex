@@ -53,8 +53,8 @@ defmodule Ostara.Validation do
         case k do
           :less_than -> Map.put(acc, "exclusiveMaximum", v)
           :greater_than -> Map.put(acc, "exclusiveMinimum", v)
-          :less_than_or_equal_to -> Map.put(acc, "minimum", v)
-          :greater_than_or_equal_to -> Map.put(acc, "maximum", v)
+          :less_than_or_equal_to -> Map.put(acc, "maximum", v)
+          :greater_than_or_equal_to -> Map.put(acc, "minimum", v)
           _ -> acc
         end
       end)
@@ -77,7 +77,7 @@ defmodule Ostara.Validation do
     update_property(map, field, validations)
   end
 
-  defp apply_validation({name, _, _}, map) when name in [:data, :cast] do
+  defp apply_validation({name, _, _}, map) when name in [:data, :cast, :cast_embed] do
     map
   end
 

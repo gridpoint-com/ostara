@@ -7,14 +7,15 @@ defmodule OstaraTest do
     test "produces the correct schema" do
       assert Ostara.transmute(Product) == %{
                "$schema" => "https://json-schema.org/draft/2020-12/schema",
+               "$id" => "product",
                "title" => "Product",
                "type" => "object",
                "description" => "A product from Acme's catalog",
                "properties" => %{
-                 "productId" => %{
+                 "product_id" => %{
                    "type" => "integer"
                  },
-                 "productName" => %{
+                 "product_name" => %{
                    "type" => "string"
                  },
                  "price" => %{
@@ -63,7 +64,7 @@ defmodule OstaraTest do
                    }
                  }
                },
-               "required" => ["dimensions", "productId", "productName", "price"]
+               "required" => ["dimensions", "product_id", "product_name", "price"]
              }
     end
 

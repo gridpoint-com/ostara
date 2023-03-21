@@ -62,11 +62,6 @@ defmodule Ostara.JSONSchema do
 
   @spec field_name(atom()) :: String.t()
   def field_name(field) do
-    [h | t] =
-      field
-      |> to_string()
-      |> String.split("_")
-
-    h <> Enum.map_join(t, &String.capitalize/1)
+    to_string(field)
   end
 end

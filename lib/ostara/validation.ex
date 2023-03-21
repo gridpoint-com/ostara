@@ -77,7 +77,7 @@ defmodule Ostara.Validation do
     update_property(map, field, validations)
   end
 
-  defp apply_validation({name, _, _}, map) when name in [:data, :cast, :cast_embed] do
+  defp apply_validation({name, _, _}, map) when name in [:data, :cast, :cast_embed, :schema] do
     map
   end
 

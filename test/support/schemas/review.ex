@@ -1,4 +1,5 @@
 defmodule Ostara.Schemas.Product.Review do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 

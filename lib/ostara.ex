@@ -56,7 +56,7 @@ defmodule Ostara do
     * `:format` - If `:json`, returns the data as pretty-printed JSON
 
   """
-  @spec transmute(atom(), [{:format, atom()}]) :: map()
+  @spec transmute(atom(), [{:format, atom()}]) :: map() | String.t()
   def transmute(source, opts \\ []) when is_atom(source) do
     format = Keyword.get(opts, :format)
     schema = JSONSchema.generate(source, root: true)

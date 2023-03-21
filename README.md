@@ -40,11 +40,12 @@ Ostara will produce the following data:
 ```elixir
 %{
   "$schema" => "https://json-schema.org/draft/2020-12/schema",
+  "$id" => "product",
   "title" => "Product",
   "type" => "object",
   "description" => "A product from Acme's catalog",
   "properties" => %{
-    "productName" => %{
+    "product_name" => %{
       "type" => "string"
     },
     "price" => %{
@@ -52,7 +53,7 @@ Ostara will produce the following data:
       "exclusiveMinimum" => 0
     }
   },
-  "required" => ["productName"]
+  "required" => ["product_name"]
 }
 ```
 
@@ -63,7 +64,7 @@ Ostara is [available in Hex] and can beinstalled by adding `ostara` to your list
 ```elixir
 def deps do
   [
-    {:ostara, "~> 0.2.0"}
+    {:ostara, "~> 0.4.0"}
   ]
 end
 ```

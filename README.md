@@ -59,7 +59,7 @@ Ostara will produce the following data:
 
 ## Installation
 
-Ostara is [available in Hex] and can beinstalled by adding `ostara` to your list of dependencies in `mix.exs`:
+Ostara is [available in Hex] and can be installed by adding `ostara` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do

@@ -16,8 +16,8 @@ defmodule Ostara.JSONSchema do
     root? = Keyword.get(opts, :root, false)
 
     %{"type" => "object"}
-    |> put_json_schema_fields(root?)
     |> put_title(source)
+    |> put_json_schema_fields(root?)
     |> put_description(source)
     |> Properties.put_properties(source)
     |> Validation.put_validations(source)
@@ -48,8 +48,11 @@ defmodule Ostara.JSONSchema do
 
   @spec put_json_schema_fields(map(), boolean()) :: map()
   defp put_json_schema_fields(map, true) do
+    id = Map.fetch!(map, "title")
+
     fields = %{
-      "$schema" => "https://json-schema.org/draft/2020-12/schema"
+      "$schema" => "https://json-schema.org/draft/2020-12/schema",
+      "$id" => String.downcase(id)
     }
 
     Map.merge(map, fields)

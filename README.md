@@ -16,7 +16,7 @@ Given the following schema module:
 
 ```elixir
 defmodule Product do
-  @moduledoc "A product from Acme's catalog",
+  @moduledoc "A product from Acme's catalog"
   use Ecto.Schema
 
   @primary_key false

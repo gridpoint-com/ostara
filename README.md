@@ -35,10 +35,10 @@ defmodule Product do
 end
 ```
 
-Ostara will produce the following data:
+Ostara will produce the following JSON data:
 
 ```elixir
-%{
+{
   "$schema" => "https://json-schema.org/draft/2020-12/schema",
   "$id" => "product",
   "title" => "Product",

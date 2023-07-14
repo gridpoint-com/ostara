@@ -34,8 +34,12 @@ defmodule Ostara.Properties do
     source.__schema__(:fields)
   end
 
-  @spec propertize_type(atom()) :: map()
+  @spec propertize_type(atom() | {:parameterized, struct(), map()}) :: map()
   defp propertize_type(:binary_id) do
+    %{"type" => "string"}
+  end
+
+  defp propertize_type({:parameterized, Ecto.Enum, _params}) do
     %{"type" => "string"}
   end
 

@@ -82,7 +82,7 @@ defmodule Ostara.Validation do
   end
 
   defp apply_validation(validation, map) do
-    Logger.warn("No validation: " <> inspect(validation))
+    Logger.warning("No validation: " <> inspect(validation))
     map
   end
 

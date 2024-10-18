@@ -2,7 +2,7 @@ defmodule Ostara.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/gridpoint-com/ostara"
-  @version "0.4.3"
+  @version "0.4.4"
 
   def project do
     [
@@ -32,10 +32,10 @@ defmodule Ostara.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1", only: [:dev, :test], runtime: false},
       {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
-      {:ecto, "~> 3.8"},
+      {:ecto, "~> 3.11"},
       {:jason, "~> 1.4"}
     ]
   end
